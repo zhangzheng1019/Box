@@ -1,0 +1,139 @@
+$containerW = 950px
+$iconW = 125px
+$iconH = 120px
+$eyesW = 86px
+$eyesH = 35px
+$bodyW = 110px
+$bodyH = 86px
+setMarRight(right=0)
+    margin-right right
+
+setMarBottom(bot=0)
+    margin-bottom bot
+
+W(w)
+    width w
+H(h)
+    height h
+Br()
+    border-radius arguments
+
+
+-pos(type, args)
+  i = 0
+  position: unquote(type)
+  {args[i]}: args[i + 1] is a 'unit' ? args[i += 1] : 0
+  {args[i += 1]}: args[i + 1] is a 'unit' ? args[i += 1] : 0
+
+absolute()
+  -pos('absolute', arguments)
+
+fixed()
+  -pos('fixed', arguments)
+
+@keyframes smile 
+  0% 
+    border-radius 0%
+  
+  20% 
+    Br 50%
+  
+  70% 
+    Br 50%
+  
+
+
+* 
+    padding 0px
+    margin 0px
+
+*, *after, *before 
+    -webkit-box-sizing border-box
+    -moz-box-sizing border-box
+    box-sizing border-box
+
+.container 
+    width $containerW
+    margin 70px auto 0px auto
+    text-align center
+    .emoji-container 
+        display -webkit-box
+        display -ms-flexbox
+        display flex
+        -ms-grid-column-align center
+        justify-items center
+        -webkit-box-align start
+        -ms-flex-align start
+        align-items flex-start
+        -ms-flex-wrap wrap
+        flex-wrap wrap
+.icon
+    setMarRight(40px)
+    setMarBottom(40px)
+    width $iconW
+    height $iconH
+    position relative
+    &:nth-child(6n)
+    	setMarRight()
+    .frog 
+        absolute top left
+        width 100%
+        height 100%
+    .body 
+        width $bodyW
+        height $bodyH
+        background-color #A3D768
+        Br 50%
+        absolute top 25px
+        absolute left right
+        margin auto
+        box-shadow 4px 4px 0px 0px rgba(163, 215, 104, 0.3)
+.frog#frog-1 .body .mouth 
+    width 18px
+    height 22px
+    border-bottom 3px solid #3F6A34
+    absolute top 6px
+    absolute left right
+    -webkit-animation smile 3.8s linear 0s infinite
+    animation smile 3.8s linear 0s infinite
+    margin auto
+
+.icon .frog .eyes 
+    width $eyesW
+    height $eyesH
+    absolute top 8px
+    absolute left right
+    margin auto
+    .eye 
+        width 35px
+        height 35px
+        &:before
+            content ""
+            display block
+            width 100%
+            height 100%
+            background-color #A3D768
+            Br 50%
+        .eye-inner 
+            background-color #fff
+            width 80%
+            height 80%
+            absolute top 10% left 10%
+            Br 50%
+        .pupil 
+            background-color #3F6A34
+            width 60%
+            height 60%
+            absolute top 20% left 20%
+            Br 50%
+            .light 
+                background-color #fff
+                width 50%
+                height 50%
+                absolute top 10% left 10%
+                Br 50%
+    & .eye-left
+        absolute top left
+    & .eye-right
+        absolute top right
+        
