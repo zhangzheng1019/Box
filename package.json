@@ -1,0 +1,22 @@
+{
+  "name": "box",
+  "version": "1.0.0",
+  "description": "积木盒子笔试题",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangzheng1019/Box.git"
+  },
+  "keywords": [
+    "jimu"
+  ],
+  "author": "zhangzheng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhangzheng1019/Box/issues"
+  },
+  "homepage": "https://github.com/zhangzheng1019/Box#readme"
+}
