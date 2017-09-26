@@ -1,0 +1,117 @@
+smallTitleColor = #8b939f
+bigTitleColor = #2c3038
+defaultFontSize = 12px
+pLineH = 18px
+pic-common()
+	width 100%
+	display block
+wrem(num)
+	width unit(num, rem)
+
+*
+	margin 0
+	padding 0
+body
+	min-width 320px
+	max-width 750px
+	margin 0 auto
+.clearfix
+	zoom 1
+	&::after
+		clear both
+		content "."
+		display block
+		font-size 0
+		height 0
+		line-height 0
+		visibility hidden
+#why, #grow, #story
+	text-align center
+	& p.label
+		font-size 20px
+		text-align center
+		position relative
+		&::after
+			content ""
+			display block
+			width 20px
+			height 3px
+			background-color #3793df
+			position absolute
+			left 0
+			right 0
+			margin 8px auto
+#grow p.label::after
+	background-color #fff
+	
+
+#why 
+	padding 0 .6667rem 1.0667rem
+	& .logo
+		wrem(2.12)
+		margin 1.0667rem auto
+		& img
+			pic-common()
+
+	& .features .feature
+		width 50%
+		float left
+		margin 0 auto
+		text-align center
+		& img
+			width 60px
+			margin .8667rem auto .4667rem
+		& p
+			color smallTitleColor
+			line-height pLineH
+			&.big-title
+				color bigTitleColor
+				font-size 17px
+				margin .1333rem auto
+#grow
+	background url(../public/images/mountain-bg.png) top center #3793df
+	background-size cover
+	padding 1.0667rem .6667rem 2.1333rem
+	& .label
+		color #fff
+		margin-bottom .6667rem
+	& .swiper-slide 
+		background #fff
+		border-radius 4px
+		& p
+			padding .13333rem 0
+			font-size 12px
+			color #2c3038
+			width 90%
+			margin 0 auto
+			text-align left
+		& p.big-title
+			width 100%
+			text-align center
+			color #000
+			padding .5333rem 0
+			font-size 30px
+			font-family "Montserrat"
+		& p span.month
+			display inline-block
+			padding-right 5px
+			white-space nowrap
+#story 
+	padding 1.0667rem .5333rem
+	& .story-content
+		margin-top 1.0667rem
+	& p
+		line-height pLineH
+		margin-bottom .2667rem
+	& img
+		width 80px
+		margin .8rem auto .4rem
+	& .desc
+		text-align left
+		font-family "Montserrat"
+	& .story-item p
+		color smallTitleColor
+		font-size defaultFontSize
+		&.big-title
+			font-size 17px
+			color #000
