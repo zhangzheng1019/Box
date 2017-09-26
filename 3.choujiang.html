@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3.vue 抽奖</title>
+	<style type="text/css">
+		*{margin: 0; padding: 0;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;outline: none;}
+		.wrap{width:300px;margin:20px auto;text-align:center;}
+		.box{padding:10px;color:red;font:bold 24px "微软雅黑";border:1px solid #FF7F50;color:red;margin:20px auto;}
+		.play{background-color:brown;border:1px solid darkred;padding:5px 12px;font:bold 16px "微软雅黑";color:white;cursor:pointer;}
+		.box,
+		.play{-webkit-border-radius:11px;-moz-border-radius:11px;border-radius:11px;}
+		.gray{background-color: #aaa;border-color: #aaa;}
+	</style>
+</head>
+<body>
+	<!-- 奖品为1-9元，最多抽9次，在页面上显示每次抽到的金额，并且每次抽到的金额不可重复 -->
+	<!-- Uncaught RangeError: Maximum call stack size exceeded ::  循环，回调函数造成-->
+
+<div class="wrap" id="app">
+	<div id="box" class="box" v-html="result?result:'开始抽奖了！'"></div>
+	<input type="button" :value="isClick?'结束':'开始'" @click="start()" id="play" class="play" :class="disabled?'gray':''"/>
+	<p class="tips">您最多可以抽{{times}}次，现在还剩{{overTimes}}次</p>
+	<div>您的抽奖结果：
+		<p v-for="item in existArr" v-text="item"></p>
+	</div>
+</div>
+<script type="text/javascript" src="js/vue v2.3.2.js"></script>
+<script>
+	var app = new Vue({
+		el:"#app",
+		data:{
+			minNum: 0,//范围最小值
+			maxNum: 9,//范围最大值
+			times: 9,//抽奖次数
+			result: '',
+			existArr: [], //抽到的数组
+			overTimes: 9, //剩余的次数
+			disabled: false,//记录按钮是否可点击
+			isClick: false, //记录按钮是否已经点击
+			timer: null  //记录循环
+		},
+		methods: {
+			start: function(){
+				var that = this;
+				
+				if(that.timer){
+					clearInterval(that.timer);
+					var random = that.getRandNumber(that.switchNumber(that.minNum), that.switchNumber(that.maxNum));
+					if(that.overTimes>0 && that.is_Arr(random,that.existArr)){
+						that.start();
+					}else {
+						that.existArr.push(random);
+						that.overTimes--;
+						that.timer = null;
+					}
+					that.result = that.existArr[that.existArr.length-1] + '元';
+					that.isClick = false;
+				}else if(that.overTimes>0){
+					that.timer = setInterval(function(){
+						var random = that.getRandNumber(that.switchNumber(that.minNum), that.switchNumber(that.maxNum));
+						that.result = random + '元';
+					},50);
+					that.isClick = true;
+				}else if(that.overTimes<1) {
+					alert("您的抽奖次数已用完！");
+					that.disabled = true;
+				}
+			},
+			getRandNumber: function(min,max){
+				return Math.ceil(Math.random()*(max-min))+min;
+			},
+			is_Arr: function(val,arr){
+				for(var i=0;i<this.arrLen(arr);i++){
+					var tmp = arr[i].toString();
+					if(val == tmp){
+						return true;
+					}
+				}
+				return false;
+			},
+			arrLen: function(arr){
+				var count = 0;
+				for(var i in arr){
+					count++;
+				}
+				return count;
+			},
+			switchNumber: function(string) {
+				return string*1;
+			}
+		}
+	})
+</script>
+</body>
+</html>
